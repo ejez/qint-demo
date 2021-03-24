@@ -12,7 +12,8 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
-    "quasar": "^2.0.0-beta.1"
+    "quasar": "^2.0.0-beta.1",
+    "vue-i18n": "^9.0.0"
   },
   "devDependencies": {
     "@ejez/quasar-app-extension-qint": "file://home/md/projects/quasar/ext/qint",
