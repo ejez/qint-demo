@@ -13,7 +13,7 @@ export default boot(async ({ app, router, ssrContext, urlPath }) => {
     cookieConf: { useCookie = false } = {},
     langTagsConf,
     quasarLangConf: { importQLang },
-    vueI18nConf,
+    vueI18nConf: { legacy, vueI18nOptions, composerOptions, importGeneralMsg },
   } = getQintConf()
 
   // Get the language tag to start the app with.
@@ -27,9 +27,7 @@ export default boot(async ({ app, router, ssrContext, urlPath }) => {
 
   // Create Vue I18n instance.
   const i18n = createI18n(
-    vueI18nConf.legacy
-      ? vueI18nConf.vueI18nOptions
-      : Object.assign(vueI18nConf.composerOptions, { legacy: false })
+    legacy ? vueI18nOptions : Object.assign(composerOptions, { legacy: false })
   )
   app.use(i18n)
   i18n.global.locale = langTag
@@ -40,7 +38,7 @@ export default boot(async ({ app, router, ssrContext, urlPath }) => {
   const loadVueI18nGeneralMsgPromise = loadVueI18nMsg({
     langTag,
     i18n,
-    importMsgFn: vueI18nConf.importGeneralMsg,
+    importMsgFn: importGeneralMsg,
   })
 
   // Load and set the language pack corresponding to `langTag`.
