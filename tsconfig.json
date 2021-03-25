@@ -1,6 +1,19 @@
 {
   "extends": "@quasar/app/tsconfig-preset",
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+
+    // Quasar-defined webpack aliases
+    "paths": {
+      "src/*": ["src/*"],
+      "app/*": ["*"],
+      "components/*": ["src/components/*"],
+      "layouts/*": ["src/layouts/*"],
+      "pages/*": ["src/pages/*"],
+      "assets/*": ["src/assets/*"],
+      "boot/*": ["src/boot/*"],
+      "qint/*": ["node_modules/@ejez/quasar-app-extension-qint/src/lib/*"],
+      "qint": ["node_modules/@ejez/quasar-app-extension-qint/src/lib"]
+    }
   }
 }
