@@ -33,7 +33,7 @@ export default boot(async ({ app, router, ssrContext, urlPath }) => {
   i18n.global.locale = langTag
 
   // Add the app routes. (The routes might have localized paths.)
-  getAppRoutes({ i18n }).forEach((route) => router.addRoute(route))
+  getAppRoutes({ ssrContext, i18n }).forEach((route) => router.addRoute(route))
 
   const loadVueI18nGeneralMsgPromise = loadVueI18nMsg({
     langTag,
