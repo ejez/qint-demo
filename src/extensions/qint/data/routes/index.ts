@@ -3,9 +3,9 @@ import { getLangTag } from 'qint'
 import type { QintI18n } from 'qint/types'
 import type { RouteRecordRaw } from 'vue-router'
 import { getQintConf } from '../../conf'
-import { getArRoutes } from './ar'
-import { getCommonRoutes } from './common'
+import { getLangTagRoutes } from './lang-tag-routes'
 import { pathSegmentMsgs } from './vue-i18n-path-segment-msgs'
+
 
 export function getAppRoutes({
   ssrContext,
@@ -16,9 +16,13 @@ export function getAppRoutes({
 }): RouteRecordRaw[] {
   const { langTags, cookieConf: { useCookie = false } = {} } = getQintConf()
 
-  langTags.forEach((langTag) =>
-    i18n.global.mergeLocaleMessage(langTag, pathSegmentMsgs[langTag])
-  )
+  langTags.forEach((langTag) => {
+    if (pathSegmentMsgs[langTag]) {
+      i18n.global.mergeLocaleMessage(langTag, pathSegmentMsgs[langTag])
+    }
+  })
+
+  const langTagRoutes = getLangTagRoutes({ ssrContext, i18n })
 
   return [
     {
@@ -28,19 +32,7 @@ export function getAppRoutes({
       redirect: () => `/${getLangTag({ langTags, useCookie, ssrContext })}`,
     },
 
-    {
-      path: '/ar',
-      name: 'arLayout',
-      component: () => import('./MainLayout.vue'),
-      children: getArRoutes({ i18n }),
-    },
-
-    {
-      path: '/en',
-      name: 'enLayout',
-      component: () => import('./MainLayout.vue'),
-      children: getCommonRoutes({ langTag: 'en', i18n }),
-    },
+    ...langTagRoutes,
 
     {
       path: '/:catchAll(.*)*',

@@ -1,6 +1,7 @@
-import { translatePath } from 'qint'
+import { localizePathSegments } from 'qint'
 import type { QintI18n } from 'qint/types'
 import { RouteRecordRaw } from 'vue-router'
+
 
 export function getCommonRoutes({
   langTag,
@@ -12,18 +13,18 @@ export function getCommonRoutes({
   return [
     {
       path: '',
-      name: 'Index',
+      name: `${langTag}Index`,
       component: () => import('./Index.vue'),
     },
 
     {
-      path: translatePath({ path: 'blog', langTag, i18n }),
+      path: localizePathSegments({ path: 'blog', langTag, i18n }),
       name: `${langTag}Blog`,
       component: () => import('./blog/PostLcList.vue'),
     },
 
     {
-      path: translatePath({ path: 'blog', langTag, i18n }) + '/:slug',
+      path: localizePathSegments({ path: 'blog', langTag, i18n }) + '/:slug',
       name: `${langTag}BlogPostLc`,
       component: () => import('./blog/PostLc.vue'),
     },

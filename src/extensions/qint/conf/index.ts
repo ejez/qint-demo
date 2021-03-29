@@ -1,6 +1,6 @@
-import type { LocaleMessageDictionary, VueMessageType } from 'vue-i18n'
-import type { QuasarLanguage } from 'quasar'
 import type { QintConf } from 'qint/types'
+import type { QuasarLanguage } from 'quasar'
+import type { LocaleMessageDictionary, VueMessageType } from 'vue-i18n'
 // import { BootFileParams } from '@quasar/app'
 
 export function getQintConf(/* { app, router, ... }: Partial<BootFileParams<unknown>> */) {
@@ -8,7 +8,9 @@ export function getQintConf(/* { app, router, ... }: Partial<BootFileParams<unkn
     langTags: ['ar', 'en'],
 
     langTagsConf: {
+      ar: { nativeName: 'العربية' },
       en: {
+        nativeName: 'English',
         quasarLang: {
           isoName: 'en-US',
         },
