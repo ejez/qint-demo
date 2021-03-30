@@ -1,5 +1,5 @@
 import type { QSsrContext } from '@quasar/app'
-import { overrideRoute, setAppLangTag } from 'qint'
+import { assignToRoute, setAppLangTag } from 'qint'
 import type { QintI18n } from 'qint/types'
 import type { RouteRecordRaw } from 'vue-router'
 import { getQintConf } from '../../conf'
@@ -32,32 +32,31 @@ export function getLangTagRoutes({
     })
   })
 
-  overrideRoute({
+  assignToRoute({
     routes: langTagRoutes,
-    routeName: 'arLayout',
-    newRoute: {
-      path: '/ar',
-      name: 'arLayout',
-      component: () => import('./MainLayout.vue'),
+    targetName: 'arLayout',
+    source: {
       children: getArRoutes({ i18n }),
     },
   })
 
   langTagRoutes.forEach((route) => {
-    route.beforeEnter = async () => {
-      const langTag = route.path.substring(1)
-      const langTagConf = langTagsConf?.[langTag]
-      await setAppLangTag({
-        langTag,
-        langTagConf,
-        i18n,
-        importVueI18nGeneralMsg: importGeneralMsg,
-        importQLang,
-        useCookie,
-        langTagCookieOptions,
-        ssrContext,
-      })
-    }
+    route.beforeEnter = [
+      async () => {
+        const langTag = route.path.substring(1)
+        const langTagConf = langTagsConf?.[langTag]
+        await setAppLangTag({
+          langTag,
+          langTagConf,
+          i18n,
+          importVueI18nGeneralMsg: importGeneralMsg,
+          importQLang,
+          useCookie,
+          langTagCookieOptions,
+          ssrContext,
+        })
+      },
+    ]
   })
 
   return langTagRoutes

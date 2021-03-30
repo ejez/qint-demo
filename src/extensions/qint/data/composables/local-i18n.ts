@@ -7,10 +7,10 @@ import { getQintConf } from '../../conf'
 
 export function setupLocalI18n({
   importMsgFn,
-  composerOverrideOptions,
+  composerOptionsAssignments,
 }: {
   importMsgFn: QintImportVueI18nMsgFn
-  composerOverrideOptions?: ComposerOptions
+  composerOptionsAssignments?: Partial<ComposerOptions>
 }) {
   const {
     vueI18nConf: { composerOptions },
@@ -22,7 +22,7 @@ export function setupLocalI18n({
       {
         useScope: 'local' as const,
       },
-      composerOverrideOptions
+      composerOptionsAssignments
     )
   )
 
@@ -33,7 +33,9 @@ export function setupLocalI18n({
         langTag,
         i18n,
         importMsgFn,
-      }).catch((err) => console.error(err))
+      }).catch((err) => {
+        console.error(err)
+      })
     },
     { immediate: true }
   )

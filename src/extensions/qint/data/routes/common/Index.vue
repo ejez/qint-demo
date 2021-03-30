@@ -1,7 +1,7 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    {{ gt('g.Welcome to Qint demo') }}
-    {{ t('from Index') }}
+    {{ t('g.Welcome to Qint demo') }}
+    {{ lt('from Index') }}
   </q-page>
 </template>
 
@@ -16,7 +16,7 @@ export default defineComponent({
 
   setup() {
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { t } = setupLocalI18n({
+    const { t: lt } = setupLocalI18n({
       importMsgFn: async (langTag) =>
         (<{ default: LocaleMessageDictionary<VueMessageType> }>(
           await import(`./vue-i18n-index-msgs/${langTag}`)
@@ -24,9 +24,9 @@ export default defineComponent({
     })
 
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { t: gt } = useI18n()
+    const { t } = useI18n()
 
-    return { t, gt }
+    return { lt, t }
   },
 })
 </script>

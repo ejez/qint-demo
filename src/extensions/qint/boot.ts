@@ -5,7 +5,6 @@ import { createI18n } from 'vue-i18n'
 import { getQintConf } from './conf'
 import { getAppRoutes } from './data/routes'
 
-
 export let i18nInstance: I18n<unknown, unknown, unknown, boolean>
 
 export default boot(async ({ app, router, ssrContext, urlPath }) => {
@@ -25,7 +24,9 @@ export default boot(async ({ app, router, ssrContext, urlPath }) => {
   const i18n = i18nInstance.global
 
   // Add the app routes. (The routes might have localized paths.)
-  getAppRoutes({ ssrContext, i18n }).forEach((route) => router.addRoute(route))
+  getAppRoutes({ ssrContext, i18n }).forEach((route) => {
+    router.addRoute(route)
+  })
 
   // Get the language tag to start the app with.
   const langTag = getLangTag({

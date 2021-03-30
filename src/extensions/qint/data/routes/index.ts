@@ -35,7 +35,7 @@ export function getAppRoutes({
 
     {
       path: '/:catchAll(.*)*',
-      name: 'CatchAll',
+      name: 'catchAll',
       component: () => import('./root/Error404.vue'),
     },
   ]
