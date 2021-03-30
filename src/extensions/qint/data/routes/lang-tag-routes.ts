@@ -6,7 +6,6 @@ import { getQintConf } from '../../conf'
 import { getArRoutes } from './ar'
 import { getCommonRoutes } from './common'
 
-
 export function getLangTagRoutes({
   ssrContext,
   i18n,

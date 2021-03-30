@@ -6,7 +6,6 @@ import { getQintConf } from '../../conf'
 import { getLangTagRoutes } from './lang-tag-routes'
 import { pathSegmentMsgs } from './vue-i18n-path-segment-msgs'
 
-
 export function getAppRoutes({
   ssrContext,
   i18n,
@@ -18,7 +17,7 @@ export function getAppRoutes({
 
   langTags.forEach((langTag) => {
     if (pathSegmentMsgs[langTag]) {
-      i18n.global.mergeLocaleMessage(langTag, pathSegmentMsgs[langTag])
+      i18n.mergeLocaleMessage(langTag, pathSegmentMsgs[langTag])
     }
   })
 

@@ -1,11 +1,12 @@
 import { getLangTag, setAppLangTag } from 'qint'
-import type { QintI18n } from 'qint/types'
 import { boot } from 'quasar/wrappers'
+import type { I18n } from 'vue-i18n'
 import { createI18n } from 'vue-i18n'
 import { getQintConf } from './conf'
 import { getAppRoutes } from './data/routes'
 
-export let i18n: QintI18n
+
+export let i18nInstance: I18n<unknown, unknown, unknown, boolean>
 
 export default boot(async ({ app, router, ssrContext, urlPath }) => {
   const {
@@ -17,10 +18,11 @@ export default boot(async ({ app, router, ssrContext, urlPath }) => {
   } = getQintConf()
 
   // Create Vue I18n instance.
-  const i18n = createI18n(
+  const i18nInstance = createI18n(
     legacy ? vueI18nOptions : Object.assign(composerOptions, { legacy: false })
   )
-  app.use(i18n)
+  app.use(i18nInstance)
+  const i18n = i18nInstance.global
 
   // Add the app routes. (The routes might have localized paths.)
   getAppRoutes({ ssrContext, i18n }).forEach((route) => router.addRoute(route))

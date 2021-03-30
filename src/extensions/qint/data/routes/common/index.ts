@@ -2,7 +2,6 @@ import { localizePathSegments } from 'qint'
 import type { QintI18n } from 'qint/types'
 import { RouteRecordRaw } from 'vue-router'
 
-
 export function getCommonRoutes({
   langTag,
   i18n,
