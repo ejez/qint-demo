@@ -12,7 +12,8 @@ export function getArRoutes({ i18n }: { i18n: QintI18n }): RouteRecordRaw[] {
     routes: getCommonRoutes({ langTag: 'ar', i18n }),
     assignments: {
       arBlog: {
-        component: () => import('./blog/PostLcList.vue'),
+        component: () =>
+          import('../../../pages/ar/blog/post-lc-list/PostLcList.vue'),
       },
     },
   })

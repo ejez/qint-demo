@@ -1,8 +1,8 @@
 import type { QSsrContext } from '@quasar/app'
 import { assignToRoute, setAppLangTag } from 'qint'
 import type { QintI18n } from 'qint/types'
+import { getQintConf } from 'src/extensions/qint/conf'
 import type { RouteRecordRaw } from 'vue-router'
-import { getQintConf } from '../../conf'
 import { getArRoutes } from './ar'
 import { getCommonRoutes } from './common'
 
@@ -27,7 +27,7 @@ export function getLangTagRoutes({
     langTagRoutes.push({
       path: `/${langTag}`,
       name: langTag.replace(/-/g, '') + 'Layout',
-      component: () => import('./MainLayout.vue'),
+      component: () => import('../../layouts/MainLayout.vue'),
       children: getCommonRoutes({ langTag, i18n }),
     })
   })
@@ -49,7 +49,7 @@ export function getLangTagRoutes({
           langTag,
           langTagConf,
           i18n,
-          importVueI18nGeneralMsg: importGeneralMsg,
+          importVueI18nMsgFn: importGeneralMsg,
           importQLang,
           useCookie,
           langTagCookieOptions,

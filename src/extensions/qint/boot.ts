@@ -1,9 +1,9 @@
 import { getLangTag, setAppLangTag } from 'qint'
 import { boot } from 'quasar/wrappers'
+import { getAppRoutes } from 'src/../src-qint/router/routes'
 import type { I18n } from 'vue-i18n'
 import { createI18n } from 'vue-i18n'
 import { getQintConf } from './conf'
-import { getAppRoutes } from './data/routes'
 
 export let i18nInstance: I18n<unknown, unknown, unknown, boolean>
 
@@ -41,7 +41,7 @@ export default boot(async ({ app, router, ssrContext, urlPath }) => {
     langTag,
     langTagConf,
     i18n,
-    importVueI18nGeneralMsg: importGeneralMsg,
+    importVueI18nMsgFn: importGeneralMsg,
     importQLang,
     useCookie,
     langTagCookieOptions,

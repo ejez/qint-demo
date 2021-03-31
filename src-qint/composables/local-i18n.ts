@@ -1,9 +1,9 @@
-import type { QintImportVueI18nMsgFn } from 'qint/types'
-import type { ComposerOptions } from 'vue-i18n'
 import { loadVueI18nMsg } from 'qint'
+import type { QintImportVueI18nMsgFn } from 'qint/types'
+import { getQintConf } from 'src/extensions/qint/conf'
 import { watch } from 'vue'
+import type { ComposerOptions } from 'vue-i18n'
 import { useI18n } from 'vue-i18n'
-import { getQintConf } from '../../conf'
 
 export function setupLocalI18n({
   importMsgFn,

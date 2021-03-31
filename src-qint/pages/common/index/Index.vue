@@ -9,7 +9,7 @@
 import { defineComponent } from 'vue'
 import type { LocaleMessageDictionary, VueMessageType } from 'vue-i18n'
 import { useI18n } from 'vue-i18n'
-import { setupLocalI18n } from '../../composables/local-i18n'
+import { setupLocalI18n } from '../../../composables/local-i18n'
 
 export default defineComponent({
   name: 'Index',
@@ -19,7 +19,7 @@ export default defineComponent({
     const { t: lt } = setupLocalI18n({
       importMsgFn: async (langTag) =>
         (<{ default: LocaleMessageDictionary<VueMessageType> }>(
-          await import(`./vue-i18n-index-msgs/${langTag}`)
+          await import(`./i18n-msgs/${langTag}`)
         )).default,
     })
 

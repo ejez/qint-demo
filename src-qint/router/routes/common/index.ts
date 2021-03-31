@@ -14,13 +14,14 @@ export function getCommonRoutes({
     {
       path: '',
       name: `${langTag}Index`,
-      component: () => import('./Index.vue'),
+      component: () => import('../../../pages/common/index/Index.vue'),
     },
 
     {
       path: localizePathSegments({ path: 'blog', langTag, i18n }),
       name: `${langTag}Blog`,
-      component: () => import('./blog/PostLcList.vue'),
+      component: () =>
+        import('../../../pages/common/blog/post-lc-list/PostLcList.vue'),
       beforeEnter: [
         async () => {
           await loadVueI18nMsg({
@@ -28,7 +29,7 @@ export function getCommonRoutes({
             i18n,
             importMsgFn: async (langTag) =>
               (<{ default: LocaleMessageDictionary<VueMessageType> }>(
-                await import(`./vue-i18n-blog-route-msgs/${langTag}`)
+                await import(`../../../i18n/route-msgs/common/blog/${langTag}`)
               )).default,
           })
         },
@@ -38,7 +39,7 @@ export function getCommonRoutes({
     {
       path: localizePathSegments({ path: 'blog', langTag, i18n }) + '/:slug',
       name: `${langTag}BlogPostLc`,
-      component: () => import('./blog/PostLc.vue'),
+      component: () => import('../../../pages/common/blog/post-lc/PostLc.vue'),
     },
   ]
 }

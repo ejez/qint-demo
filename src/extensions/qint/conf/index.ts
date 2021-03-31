@@ -45,7 +45,7 @@ export function getQintConf(/* { app, router, ... }: Partial<BootFileParams<unkn
       importGeneralMsg: async (langTag) =>
         (<{ default: LocaleMessageDictionary<VueMessageType> }>(
           // Modify if the messages are in a different location.
-          await import(`../data/vue-i18n-general-msgs/${langTag}`)
+          await import(`src/../src-qint/i18n/general-msgs/${langTag}`)
         )).default,
     },
 

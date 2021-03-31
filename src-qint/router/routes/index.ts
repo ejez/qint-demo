@@ -1,10 +1,10 @@
 import type { QSsrContext } from '@quasar/app'
 import { getLangTag } from 'qint'
 import type { QintI18n } from 'qint/types'
+import { getQintConf } from 'src/extensions/qint/conf'
 import type { RouteRecordRaw } from 'vue-router'
-import { getQintConf } from '../../conf'
 import { getLangTagRoutes } from './lang-tag-routes'
-import { pathSegmentMsgs } from './vue-i18n-path-segment-msgs'
+import { pathSegmentMsgs } from '../../i18n/path-msgs'
 
 export function getAppRoutes({
   ssrContext,
