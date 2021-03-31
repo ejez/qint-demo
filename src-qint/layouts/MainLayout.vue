@@ -83,7 +83,10 @@
           </q-btn>
         </div>
 
-        <qint-lang-tag-selector />
+        <qint-lang-tag-selector
+          :lang-tags="langTags"
+          :lang-tags-conf="langTagsConf"
+        />
       </q-toolbar>
     </q-header>
 
@@ -180,8 +183,9 @@
 
 <script lang="ts">
 import { fabYoutube } from '@quasar/extras/fontawesome-v5'
+import { getQintConf } from 'src/extensions/qint/conf'
 import { defineComponent, ref } from 'vue'
-import QintLangTagSelector from '../components/QintLangTagSelector.vue'
+import QintLangTagSelector from 'qint/components/QintLangTagSelector.vue'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -190,6 +194,8 @@ export default defineComponent({
   },
 
   setup() {
+    const { langTags, langTagsConf } = getQintConf()
+
     const leftDrawerOpen = ref(false)
     const search = ref('')
 
@@ -198,6 +204,9 @@ export default defineComponent({
     }
 
     return {
+      langTags,
+      langTagsConf,
+
       fabYoutube,
 
       leftDrawerOpen,

@@ -6,10 +6,11 @@
 </template>
 
 <script lang="ts">
+import { setupLocalI18n } from 'qint/composables/local-i18n'
+import { getQintConf } from 'src/extensions/qint/conf'
 import { defineComponent } from 'vue'
 import type { LocaleMessageDictionary, VueMessageType } from 'vue-i18n'
 import { useI18n } from 'vue-i18n'
-import { setupLocalI18n } from '../../../composables/local-i18n'
 
 export default defineComponent({
   name: 'Index',
@@ -17,6 +18,8 @@ export default defineComponent({
   setup() {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t: lt } = setupLocalI18n({
+      composerOptions: getQintConf().vueI18nConf.composerOptions,
+
       importMsgFn: async (langTag) =>
         (<{ default: LocaleMessageDictionary<VueMessageType> }>(
           await import(`./i18n-msgs/${langTag}`)
