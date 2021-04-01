@@ -28,7 +28,21 @@ export function getLangTagRoutes({
       path: `/${langTag}`,
       name: langTag.replace(/-/g, '') + 'Layout',
       component: () => import('../../layouts/MainLayout.vue'),
-      children: getCommonRoutes({ langTag, i18n }),
+      children: getCommonRoutes({ langTag, ssrContext, i18n }),
+      beforeEnter: [
+        async () => {
+          await setAppLangTag({
+            langTag,
+            langTagConf: langTagsConf?.[langTag],
+            i18n,
+            importVueI18nMsgFn: importGeneralMsg,
+            importQLang,
+            useCookie,
+            langTagCookieOptions,
+            ssrContext,
+          })
+        },
+      ],
     })
   })
 
@@ -36,27 +50,8 @@ export function getLangTagRoutes({
     routes: langTagRoutes,
     targetName: 'arLayout',
     source: {
-      children: getArRoutes({ i18n }),
+      children: getArRoutes({ ssrContext, i18n }),
     },
-  })
-
-  langTagRoutes.forEach((route) => {
-    route.beforeEnter = [
-      async () => {
-        const langTag = route.path.substring(1)
-        const langTagConf = langTagsConf?.[langTag]
-        await setAppLangTag({
-          langTag,
-          langTagConf,
-          i18n,
-          importVueI18nMsgFn: importGeneralMsg,
-          importQLang,
-          useCookie,
-          langTagCookieOptions,
-          ssrContext,
-        })
-      },
-    ]
   })
 
   return langTagRoutes

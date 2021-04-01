@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { setupLocalI18n } from 'qint/composables/local-i18n'
+import { setupLocalI18n } from 'qint'
 import { getQintConf } from 'src/extensions/qint/conf'
 import { defineComponent } from 'vue'
 import type { LocaleMessageDictionary, VueMessageType } from 'vue-i18n'

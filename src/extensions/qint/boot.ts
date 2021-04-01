@@ -16,8 +16,7 @@ export default boot(async ({ app, router, ssrContext, urlPath }) => {
     vueI18nConf: { legacy, vueI18nOptions, composerOptions, importGeneralMsg },
   } = getQintConf()
 
-  // Create Vue I18n instance.
-  const i18nInstance = createI18n(
+  i18nInstance = createI18n(
     legacy ? vueI18nOptions : Object.assign(composerOptions, { legacy: false })
   )
   app.use(i18nInstance)

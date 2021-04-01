@@ -183,9 +183,9 @@
 
 <script lang="ts">
 import { fabYoutube } from '@quasar/extras/fontawesome-v5'
+import QintLangTagSelector from 'qint/components/QintLangTagSelector.vue'
 import { getQintConf } from 'src/extensions/qint/conf'
 import { defineComponent, ref } from 'vue'
-import QintLangTagSelector from 'qint/components/QintLangTagSelector.vue'
 
 export default defineComponent({
   name: 'MainLayout',
