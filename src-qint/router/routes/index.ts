@@ -27,7 +27,6 @@ export function getAppRoutes({
     {
       path: '/',
       name: 'root',
-      // TODO: redirect url should be updated when the cookie changes.
       redirect: () => `/${getLangTag({ langTags, useCookie, ssrContext })}`,
     },
 
