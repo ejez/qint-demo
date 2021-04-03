@@ -3,7 +3,7 @@ import {
     createHreflangRouteMeta,
     getHost,
     loadVueI18nMsg,
-    localizePathSegments
+    localizeRoutePathSegments
 } from 'qint'
 import type { QintI18n } from 'qint/types'
 import { getQintConf } from 'src/extensions/qint/conf'
@@ -39,7 +39,7 @@ export function getCommonRoutes({
     },
 
     {
-      path: localizePathSegments({ path: 'blog', langTag, i18n }),
+      path: localizeRoutePathSegments({ path: 'blog', langTag, i18n }),
       name: `${langTag}Blog`,
       component: () =>
         import('../../../pages/common/blog/post-lc-list/PostLcList.vue'),
@@ -67,7 +67,8 @@ export function getCommonRoutes({
     },
 
     {
-      path: localizePathSegments({ path: 'blog', langTag, i18n }) + '/:slug',
+      path:
+        localizeRoutePathSegments({ path: 'blog', langTag, i18n }) + '/:slug',
       name: `${langTag}BlogPostLc`,
       component: () => import('../../../pages/common/blog/post-lc/PostLc.vue'),
     },
