@@ -1,6 +1,7 @@
 import type { QSsrContext } from '@quasar/app'
 import {
     createHreflangRouteMeta,
+    getHost,
     loadVueI18nMsg,
     localizePathSegments
 } from 'qint'
@@ -19,6 +20,7 @@ export function getCommonRoutes({
   i18n: QintI18n
 }): RouteRecordRaw[] {
   const { langTags, langTagsConf } = getQintConf()
+  const host = getHost(ssrContext)
 
   return [
     {

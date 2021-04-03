@@ -8,35 +8,22 @@
           round
           aria-label="Menu"
           icon="menu"
-          @click="toggleLeftDrawer"
+          @click="togglePrimaryDrawer"
         />
 
-        <q-btn v-if="$q.screen.gt.xs" flat no-caps no-wrap class="q-ml-xs">
-          <q-icon :name="fabYoutube" color="red" size="28px" />
+        <q-btn
+          :to="'/'"
+          v-if="$q.screen.gt.xs"
+          flat
+          no-caps
+          no-wrap
+          class="q-ml-xs"
+        >
+          <q-icon :name="laLanguageSolid" color="green" size="28px" />
           <q-toolbar-title shrink class="text-weight-bold">
-            YouTube
+            {{ t('g.Qint') }}
           </q-toolbar-title>
         </q-btn>
-
-        <q-space />
-
-        <div class="YL__toolbar-input-container row no-wrap">
-          <q-input
-            v-model="search"
-            dense
-            outlined
-            square
-            placeholder="Search"
-            class="bg-white col"
-          />
-          <q-btn
-            class="YL__toolbar-input-btn"
-            color="grey-3"
-            text-color="grey-8"
-            icon="search"
-            unelevated
-          />
-        </div>
 
         <q-space />
 
@@ -47,40 +34,28 @@
             dense
             flat
             color="grey-8"
-            icon="video_call"
+            :to="pt('blog')"
           >
-            <q-tooltip>Create a video or post</q-tooltip>
+            <q-icon :name="laReadme" color="grey-8" size="28px" />
+            <q-tooltip>{{ t('g.blog').c() }}</q-tooltip>
           </q-btn>
+
           <q-btn
             v-if="$q.screen.gt.sm"
             round
             dense
             flat
             color="grey-8"
-            icon="apps"
+            type="a"
+            href="https://github.com/ejez/qint"
+            target="_blank"
           >
-            <q-tooltip>Apps</q-tooltip>
+            <q-icon :name="laCodeSolid" color="grey-8" size="28px" />
+            <q-tooltip>{{ t('g.source code').c() }}</q-tooltip>
           </q-btn>
-          <q-btn
-            v-if="$q.screen.gt.sm"
-            round
-            dense
-            flat
-            color="grey-8"
-            icon="message"
-          >
-            <q-tooltip>Messages</q-tooltip>
-          </q-btn>
-          <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge color="red" text-color="white" floating> 2 </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
-          </q-btn>
-          <q-btn round flat>
-            <q-avatar size="26px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-            </q-avatar>
-            <q-tooltip>Account</q-tooltip>
-          </q-btn>
+
+          <q-space />
+          <q-space />
         </div>
 
         <qint-lang-tag-selector
@@ -91,7 +66,7 @@
     </q-header>
 
     <q-drawer
-      v-model="leftDrawerOpen"
+      v-model="primaryDrawerOpen"
       show-if-above
       bordered
       class="bg-grey-2"
@@ -104,73 +79,9 @@
               <q-icon color="grey" :name="link.icon" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
+              <q-item-label>{{ t('g.' + link.text).c() }}</q-item-label>
             </q-item-section>
           </q-item>
-
-          <q-separator class="q-my-md" />
-
-          <q-item v-for="link in links2" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator class="q-mt-md q-mb-xs" />
-
-          <q-item-label header class="text-weight-bold text-uppercase">
-            More from Youtube
-          </q-item-label>
-
-          <q-item v-for="link in links3" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator class="q-my-md" />
-
-          <q-item v-for="link in links4" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator class="q-mt-md q-mb-lg" />
-
-          <div class="q-px-md text-grey-9">
-            <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-              <a
-                v-for="button in buttons1"
-                :key="button.text"
-                class="YL__drawer-footer-link"
-                href="javascript:void(0)"
-              >
-                {{ button.text }}
-              </a>
-            </div>
-          </div>
-          <div class="q-py-md q-px-md text-grey-9">
-            <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-              <a
-                v-for="button in buttons2"
-                :key="button.text"
-                class="YL__drawer-footer-link"
-                href="javascript:void(0)"
-              >
-                {{ button.text }}
-              </a>
-            </div>
-          </div>
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -182,10 +93,16 @@
 </template>
 
 <script lang="ts">
-import { fabYoutube } from '@quasar/extras/fontawesome-v5'
+import {
+  laCodeSolid,
+  laLanguageSolid,
+  laReadme
+} from '@quasar/extras/line-awesome'
+import { pt } from 'qint'
 import QintLangTagSelector from 'qint/components/QintLangTagSelector.vue'
 import { getQintConf } from 'src/extensions/qint/conf'
 import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -196,88 +113,34 @@ export default defineComponent({
   setup() {
     const { langTags, langTagsConf } = getQintConf()
 
-    const leftDrawerOpen = ref(false)
-    const search = ref('')
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const { t } = useI18n()
 
-    function toggleLeftDrawer() {
-      leftDrawerOpen.value = !leftDrawerOpen.value
+    const primaryDrawerOpen = ref(false)
+
+    function togglePrimaryDrawer() {
+      primaryDrawerOpen.value = !primaryDrawerOpen.value
     }
 
     return {
       langTags,
       langTagsConf,
 
-      fabYoutube,
+      t,
+      pt,
 
-      leftDrawerOpen,
-      search,
+      laLanguageSolid,
+      laReadme,
+      laCodeSolid,
 
-      toggleLeftDrawer,
+      primaryDrawerOpen,
+      togglePrimaryDrawer,
 
       links1: [
-        { icon: 'home', text: 'Home' },
-        { icon: 'whatshot', text: 'Trending' },
-        { icon: 'subscriptions', text: 'Subscriptions' },
-      ],
-      links2: [
-        { icon: 'folder', text: 'Library' },
-        { icon: 'restore', text: 'History' },
-        { icon: 'watch_later', text: 'Watch later' },
-        { icon: 'thumb_up_alt', text: 'Liked videos' },
-      ],
-      links3: [
-        { icon: fabYoutube, text: 'YouTube Premium' },
-        { icon: 'local_movies', text: 'Movies & Shows' },
-        { icon: 'videogame_asset', text: 'Gaming' },
-        { icon: 'live_tv', text: 'Live' },
-      ],
-      links4: [
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'flag', text: 'Report history' },
-        { icon: 'help', text: 'Help' },
-        { icon: 'feedback', text: 'Send feedback' },
-      ],
-      buttons1: [
-        { text: 'About' },
-        { text: 'Press' },
-        { text: 'Copyright' },
-        { text: 'Contact us' },
-        { text: 'Creators' },
-        { text: 'Advertise' },
-        { text: 'Developers' },
-      ],
-      buttons2: [
-        { text: 'Terms' },
-        { text: 'Privacy' },
-        { text: 'Policy & Safety' },
-        { text: 'Test new features' },
+        { icon: 'home', text: 'home' },
+        { icon: laReadme, text: 'blog' },
       ],
     }
   },
 })
 </script>
-
-<style lang="sass">
-.YL
-
-  &__toolbar-input-container
-    min-width: 100px
-    width: 55%
-
-  &__toolbar-input-btn
-    border-radius: 0
-    border-style: solid
-    border-width: 1px 1px 1px 0
-    border-color: rgba(0,0,0,.24)
-    max-width: 60px
-    width: 100%
-
-  &__drawer-footer-link
-    color: inherit
-    text-decoration: none
-    font-weight: 500
-    font-size: .75rem
-
-    &:hover
-      color: #000
-</style>

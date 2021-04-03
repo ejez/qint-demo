@@ -1,35 +1,44 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    {{ t('g.Welcome to Qint demo') }}
-    {{ lt('from Index') }}
+  <q-page class="q-px-lg">
+    <h4 v-html="postLc.title"></h4>
+    <div class="text-body1" v-html="postLc.body"></div>
   </q-page>
 </template>
 
 <script lang="ts">
-import { setupLocalI18n } from 'qint'
-import { getQintConf } from 'src/extensions/qint/conf'
-import { defineComponent } from 'vue'
-import type { LocaleMessageDictionary, VueMessageType } from 'vue-i18n'
+import type { Ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+
+interface Post {
+  title: string
+  body: string
+}
 
 export default defineComponent({
   name: 'Index',
 
   setup() {
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { t: lt } = setupLocalI18n({
-      composerOptions: getQintConf().vueI18nConf.composerOptions,
+    const { locale } = useI18n()
 
-      importMsgFn: async (langTag) =>
-        (<{ default: LocaleMessageDictionary<VueMessageType> }>(
-          await import(`./i18n-msgs/${langTag}`)
-        )).default,
-    })
+    const postLc: Ref<Post> = ref({ title: '', body: '' })
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { t } = useI18n()
+    watch(
+      locale,
+      (locale) => {
+        import(`../../../content/${locale}/home`)
+          .then(({ default: res }) => {
+            postLc.value = res
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+      },
+      { immediate: true }
+    )
 
-    return { lt, t }
+    return { postLc }
   },
 })
 </script>

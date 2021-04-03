@@ -4,6 +4,7 @@ import { getAppRoutes } from 'src/../src-qint/router/routes'
 import type { I18n } from 'vue-i18n'
 import { createI18n } from 'vue-i18n'
 import { getQintConf } from './conf'
+import { augmentGlobals } from './helpers'
 
 export let i18nInstance: I18n<unknown, unknown, unknown, boolean>
 
@@ -47,3 +48,5 @@ export default boot(async ({ app, router, ssrContext, urlPath }) => {
     ssrContext,
   })
 })
+
+augmentGlobals()

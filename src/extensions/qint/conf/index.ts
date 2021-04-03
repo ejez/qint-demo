@@ -63,8 +63,8 @@ export function getQintConf(/* { app, router, ... }: Partial<BootFileParams<unkn
   qintConf.vueI18nConf.composerOptions = {
     locale: qintConf.langTags[0],
     fallbackLocale: qintConf.langTags[0],
-    missingWarn: !!process.env.DEV,
-    fallbackWarn: !!process.env.DEV,
+    missingWarn: false, // To enable for dev mode only use: !!process.env.DEV
+    fallbackWarn: false, // !!process.env.DEV
   }
 
   return qintConf
