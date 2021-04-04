@@ -11,37 +11,22 @@
           @click="togglePrimaryDrawer"
         />
 
-        <q-btn
-          :to="'/'"
-          v-if="$q.screen.gt.xs"
-          flat
-          no-caps
-          no-wrap
-          class="q-ml-xs"
-        >
+        <q-btn :to="'/'" flat no-caps no-wrap class="q-ml-xs">
           <q-icon :name="laLanguageSolid" color="green" size="28px" />
           <q-toolbar-title shrink class="text-weight-bold">
-            {{ t('g.Qint') }}
+            {{ t('Qint') }}
           </q-toolbar-title>
         </q-btn>
 
         <q-space />
 
         <div class="q-gutter-sm row items-center no-wrap">
-          <q-btn
-            v-if="$q.screen.gt.sm"
-            round
-            dense
-            flat
-            color="grey-8"
-            :to="pt('blog')"
-          >
+          <q-btn round dense flat color="grey-8" :to="pt('blog')">
             <q-icon :name="laReadme" color="grey-8" size="28px" />
-            <q-tooltip>{{ t('g.blog').c() }}</q-tooltip>
+            <q-tooltip>{{ t('blog').c() }}</q-tooltip>
           </q-btn>
 
           <q-btn
-            v-if="$q.screen.gt.sm"
             round
             dense
             flat
@@ -51,7 +36,7 @@
             target="_blank"
           >
             <q-icon :name="laCodeSolid" color="grey-8" size="28px" />
-            <q-tooltip>{{ t('g.source code').c() }}</q-tooltip>
+            <q-tooltip>{{ t('source code').c() }}</q-tooltip>
           </q-btn>
 
           <q-space />
@@ -74,12 +59,18 @@
     >
       <q-scroll-area class="fit">
         <q-list padding>
-          <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
+          <q-item
+            v-for="link in links1"
+            :key="link.text"
+            :to="pt(link.to)"
+            v-ripple
+            clickable
+          >
             <q-item-section avatar>
               <q-icon color="grey" :name="link.icon" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>{{ t('g.' + link.text).c() }}</q-item-label>
+              <q-item-label>{{ t(link.text).c() }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -96,10 +87,11 @@
 import {
   laCodeSolid,
   laLanguageSolid,
-  laReadme
+  laReadme,
 } from '@quasar/extras/line-awesome'
+// import QintLangTagSelector from 'qint/components/QintLangTagSelector.vue'
+import QintLangTagSelector from 'components/QintLangTagSelector.vue'
 import { pt } from 'qint'
-import QintLangTagSelector from 'qint/components/QintLangTagSelector.vue'
 import { getQintConf } from 'src/extensions/qint/conf'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -137,8 +129,8 @@ export default defineComponent({
       togglePrimaryDrawer,
 
       links1: [
-        { icon: 'home', text: 'home' },
-        { icon: laReadme, text: 'blog' },
+        { icon: 'home', text: 'home', to: '' },
+        { icon: laReadme, text: 'blog', to: 'blog' },
       ],
     }
   },

@@ -1,0 +1,45 @@
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9e663a6">1. Smart Language Tag Selection with Qint</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9e663a6" class="outline-2">
+<h2 id="org9e663a6"><span class="section-number-2">1</span> Smart Language Tag Selection with Qint</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+On initial application load, a language tag is selected. You might wonder how is
+the language tag chosen? Qint prioritizes a language tag &ldquo;URL prefix&rdquo; if it
+exists (for example <code>/en/blog</code>), if not, it looks for a previously set &ldquo;cookie&rdquo;,
+if no cookie is found, it falls back to the default language tag set in your
+Qint configuration.
+</p>
+
+<p>
+Note that the use of the URL prefix or the cookie is optional.
+</p>
+
+<p>
+A language tag selection can also be triggered in other ways, for example when
+changing to a route in a different language tag.
+</p>
+
+<p>
+Whenever a language tag selection is triggered, few things happen:
+</p>
+
+<ul class="org-ul">
+<li>The vue-i18n messages corresponding to the new language tag are loaded, and the locale of vue-i18n instance is changed to the new language tag.</li>
+<li>The corresponding Quasar language pack is loaded and set for the app.</li>
+<li>The language tag cookie is set or updated with the new language tag.</li>
+</ul>
+
+<p>
+Qint also provides a smart language selector component. When a translation for
+the current page exists in the target language tag, the selector switches to it,
+otherwise, it will switch to the home page of the target language tag.
+</p>
+</div>
+</div>

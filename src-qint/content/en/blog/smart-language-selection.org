@@ -1,0 +1,22 @@
+* Smart Language Selection with Qint
+
+On initial application load, a language tag is selected. You might wonder how is
+the language tag chosen? Qint prioritizes a language tag "URL prefix" if it
+exists (for example =/en/blog=), if not, it looks for a previously set "cookie",
+if no cookie is found, it falls back to the default language tag set in your
+Qint configuration.
+
+Note that the use of the URL prefix or the cookie is optional.
+
+A language tag selection can also be triggered in other ways, for example when
+changing to a route in a different language tag.
+
+Whenever a language tag selection is triggered, few things happen:
+
+- The vue-i18n messages corresponding to the new language tag are loaded, and the locale of vue-i18n instance is changed to the new language tag.
+- The corresponding Quasar language pack is loaded and set for the app.
+- The language tag cookie is set or updated with the new language tag.
+  
+Qint also provides a smart language selector component. When a translation for
+the current page exists in the target language tag, the selector switches to it,
+otherwise, it will switch to the home page of the target language tag.

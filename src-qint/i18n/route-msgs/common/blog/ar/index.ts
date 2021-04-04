@@ -1,3 +1,6 @@
 export default {
-  r: { 'from blog list route': 'من طريق قائمة المدونات' },
+  r: {
+    'Welcome to Qint Blog': 'مرحبا بكم في مدونة كِنت',
+    'Read more': 'اطَّلِع على المزيد...',
+  },
 }

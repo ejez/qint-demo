@@ -10,7 +10,7 @@ import type { Ref } from 'vue'
 import { defineComponent, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-interface Post {
+interface IndexPostLc {
   title: string
   body: string
 }
@@ -22,14 +22,14 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { locale } = useI18n()
 
-    const postLc: Ref<Post> = ref({ title: '', body: '' })
+    const postLc: Ref<IndexPostLc> = ref({ title: '', body: '' })
 
     watch(
       locale,
-      (locale) => {
-        import(`../../../content/${locale}/home`)
-          .then(({ default: res }) => {
-            postLc.value = res
+      (langTag) => {
+        import(`../../../content/${langTag}/index.ts`)
+          .then(({ default: result }) => {
+            postLc.value = result
           })
           .catch((err) => {
             console.error(err)

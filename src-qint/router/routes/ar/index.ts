@@ -20,7 +20,8 @@ export function getArRoutes({
     assignments: {
       arBlog: {
         component: () =>
-          import('../../../pages/ar/blog/post-lc-list/PostLcList.vue'),
+          // import('../../../pages/ar/blog/post-lc-list/PostLcList.vue'),
+          import('../../../pages/common/blog/post-lc-list/PostLcList.vue'),
       },
     },
   })

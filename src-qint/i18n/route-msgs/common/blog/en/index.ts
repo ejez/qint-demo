@@ -1,3 +1,6 @@
 export default {
-  r: { 'from blog list route': 'from blog list route' },
+  r: {
+    'Welcome to Qint Blog': 'Welcome to Qint Blog',
+    'Read more': 'Read more...',
+  },
 }
