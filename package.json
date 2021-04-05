@@ -16,7 +16,7 @@
     "vue-i18n": "^9.0.0"
   },
   "devDependencies": {
-    "@ejez/quasar-app-extension-qint": "file://home/md/projects/quasar/ext/qint",
+    "@ejez/quasar-app-extension-qint": "file:../ext/qint",
     "@quasar/app": "^3.0.0-beta.10",
     "@types/node": "^10.17.15",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
