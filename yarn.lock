@@ -904,9 +904,6 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@ejez/quasar-app-extension-qint@file:../ext/qint":
-  version "0.0.1"
-
 "@electron/get@^1.3.1":
   version "1.12.4"
   resolved "https://registry.yarnpkg.com/@electron/get/-/get-1.12.4.tgz#a5971113fc1bf8fa12a8789dc20152a7359f06ab"
