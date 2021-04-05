@@ -12,7 +12,7 @@
 import {
   createHreflangLink,
   localizeRoutePathSegments,
-  useQintMeta
+  useQintMeta,
 } from 'qint'
 import { getQintConf } from 'src/extensions/qint/conf'
 import type { Ref } from 'vue'

@@ -1,9 +1,9 @@
 import type { QSsrContext } from '@quasar/app'
 import {
-    createHreflangRouteMeta,
-    loadVueI18nMsg,
-    localizeRoutePathSegments,
-    useQintMeta
+  createHreflangRouteMeta,
+  loadVueI18nMsg,
+  localizeRoutePathSegments,
+  useQintMeta,
 } from 'qint'
 import type { QintI18n } from 'qint/types'
 import { getQintConf } from 'src/extensions/qint/conf'
